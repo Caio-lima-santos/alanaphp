@@ -6,7 +6,7 @@ include("../db/config.php");
 
 //inicializacao de variaveis chatas
 
-$_SESSION["Muser"]=" ";
+
 
 
 
@@ -23,11 +23,13 @@ $res=$conn->query($sql);
 
 if($row = $res->fetch_object()){
     $_SESSION["nome"]=$row->nome;
+    $_SESSION["func"]=$row->func;
+    $_SESSION["dinheiro"]=$row->dinheiro;
    
     switch($row->func){    
         
         
-        case "administrador":
+        case "adiministrador":
         header("Location: ../administrador/Aadm.php");
         break;
 
@@ -40,6 +42,7 @@ if($row = $res->fetch_object()){
         case "secretaria":
         header("Location: ../secretaria/Asec.php");
         break;
+
     
     
     }

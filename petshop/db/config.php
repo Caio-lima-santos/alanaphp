@@ -14,132 +14,142 @@ if($conn->connect_error){
    // echo"sucesso ao conectar <br>";
 }
 
-function listar($deOnde,$conn){
-    
-    $sql="SELECT  * FROM {$deOnde}" ;
+function listar($action){
 
-    $res=$conn->query($sql);
 
-    if($res != NULL){
-    switch($deOnde){
+$func=$_SESSION['func'];
 
-    case "pessoas" :
-       
-        echo "<h1>Dados Das {$deOnde}</h1>";
-        echo "<table 
-        class='table table-hover table-striped table-bordered'>";
-        echo"<tr>";
-        echo  "<th>nome</th>";
-        echo  "<th>usuario</th>";
-        echo  "<th>senha</th>";
-        echo  "<th>função</th>";
-    break;
+echo"
+<br>
+<h3>oque sera listado?</h3>
+<br>
+<form action='{$action}'>
+<input type='hidden' name='page' value='listar' >
+<input type='hidden' name='func' value='{$func}' >
+";
 
-    case "assuntos" :
-        echo "<h1>Dados Dos {$deOnde}</h1>";
-        echo "<table 
-        class='table table-hover table-striped table-bordered'>";
-        echo"<tr>";
-        echo  "<th>comando da questao</th>";
-        echo  "<th>Diciplina</th>";
-        echo  "<th>Dificuldade</th>";
-        echo  "<th>codigo</th>";
-        break;
-      
-    case "diciplinas" :
-       
-        echo "<h1>Dados Das {$deOnde}</h1>";
-        echo "<table 
-        class='table table-hover table-striped table-bordered'>";
-        echo"<tr>";
-        echo  "<th>nome</th>";
-       
-        break;
-    
-    case "provas" :
-        echo "<h1>Dados Das {$deOnde}</h1>";
-        echo "<table 
-        class='table table-hover table-striped table-bordered'>";
-        echo"<tr>";
-        echo  "<th>nome</th>";
-        echo  "<th>professor</th>";
-        echo  "<th>numquestoes</th>";
-       
-        break;
-    
-         default:
-            break;
-       
-   }
+if( $func=='adiministrador')
+echo"
+<input type='radio' name='tipo' value='secretaria' >secretaria
+<br>
+";
+
+if($func=='secretaria' || $func=='adiministrador')
+echo"
+<input type='radio' name='tipo' value='cliente' >clientes
+<br>
+";
+
+
+echo"
+<input type='radio' name='tipo' value='pet' >pets
+<br>
+";
+
+echo"
+<br>
+<button class='btn btn-primary'>aplicar</button>
+</form>
+
+";
 
 
 
 
-
-    while($row=$res->fetch_object())
-    {
-   switch($deOnde){
-
-    case "pessoas" :
-       
-        echo "<tr><td>  {$row->nome}  </td>";
-        echo "<td>  {$row->usuario}  </td>";
-        echo "<td>  {$row->senha}  </td>";
-        echo "<td>  {$row->funcao}   </td>";
-       
-        break;
-
-
-    case "assuntos" :
-       
-        echo "<tr><td>  {$row->asunto}  </td>";
-        echo "<td>  {$row->diciplina}  </td>";
-        echo "<td>  {$row->dificuldade}  </td>";
-        echo "<td>  {$row->cod}  </td>";
-       
-        break;
-
-    case "diciplinas" :
-       
-        echo "<tr><td>  {$row->nome}  </td>";
-       
-        break; 
-    
-    
-    case "provas" :
-       
-        echo "<tr><td>  {$row->nome}  </td>";
-        echo "<td>  {$row->professor}  </td>";
-        echo "<td>  {$row->numquestoes}  </td>";
-       
-        break;
-
-        default:
-        
-            break;
-        
-   }
-    }
-    echo "</table>";
-    }}
+}
 
 //fim listar
-function excluir($deOnde,$conn,$cond){
+function excluir($action){
   
-    
+
+$access=@$_SESSION['func'];
+switch(@$access){
+
+    case"adiministrador":
+    echo"
+    <form action='{$action}' method='POST'>
+
+
+    <h3> oque sera exluido?</h3>
+<input type='radio' name='tipo' value='cliente'/>cliente
+<br>
+<input type='hidden' name='page' value='excluir'>
+
+<input type='radio' name='tipo' value='professor'>professor
+<br>
+<input type='radio' name='tipo' value='pet'>pet
+<br>
+<label>insira o nome</label>
+<br>
+
+<input type='text' name='nome'>
+
+<button>excluir</button>
+
+</form> ";
+break;
+
+case "secretaria":
+    echo"
+    <form action='{$action}' method='POST'>
+
+<h3> oque sera exluido?</h3>
+    <input type='hidden' name='page' value='excluir'>
+    <br>
+<input type='radio' name='tipo' value='cliente'/>cliente
+<br>
+<input type='radio' name='tipo' value='pet'>pet
+<br>
+<label>insira o nome</label>
+<br>
+
+<input type='text' name='nome'>
+<br>
+<button>excluir</button>
+
+</form> ";
+
+break;
+
+case "cliente":
+
+    echo"
+    <form action='{$action}' method='POST'>
+
+
+    <h3> oque sera exluido?</h3>
+    <input type='hidden' name='page' value='excluir'>
+
+<input type='radio' name='tipo' value='pet'>pet
+
+<label>insira o nome</label>
+
+
+<input type='text' name='nome'>
+
+<button>excluir</button>
+
+</form> ";
+
+    break;
   
-    $sql="DELETE FROM {$deOnde} WHERE nome='{$cond}'";
-    return ($conn->query($sql));
     }
 
-function cadastrar($deOnde,$conn,$action){
-     
 
+
+
+
+}
+
+function cadastrar($action){
+ 
+$func=$_SESSION["func"];
+$nome=$_SESSION["func"];
 
   
-        switch($deOnde){
-        case 'cliente':
-    
+        switch($func){
+        case 'secretaria':
+     
         echo "
 
         <div>
@@ -147,45 +157,212 @@ function cadastrar($deOnde,$conn,$action){
     <h3>ensira os dados</h3>
  <br> <br>
     <input type='hidden' name='tipo' value='cliente'>
+    <input type='hidden' name='func' value='cliente'>
     <input type='hidden' name='action' value=''>
     <input type='hidden' name='page' value='cadastrar'>
+    <div >
+    <input type='hidden' name='acao'value='cadastrar'>
+<label class='form-label'>NOME</label>
+<br>
+<input type='text' class='form-control' name='nome'>
+<br>
+</div>
 
-        <label for=''>usuario</label>
-    <input type='text' name='usuario'>
-    <br>
-    <label for=''>senha</label>
-    <input type='text' name='senha'>
-    <br>
-    <label for=''>nome completo</label>
-    <input type='text' name='nome'>
-    <br>
-    <label for=''>cpf</label>
-    <input type='text' name='cpf'>
-    <br>
-    <label for=''>email</label>
-    <input type='text' name='email'>
-    <br>
+<div class='mb-3'>
+<label class='form-label'>SOBRENOME</label>
+<br>
+<input type='text' class='form-control' name='sobrenome'>
+<br>
+</div>
 
-    <label for=''>telefone</label>
-    <input type='text' name='telefone'>
-
-    <br>
-    <button>enviar</button>
-    </form>
-    </div>"
-    ;
+<div class='mb-3'>
+<label class='form-label'>email</label>
+<br>
+<input type='text' class='form-control' name='email'>
+<br>
+</div>
 
 
+<div class='mb-3'>
+<label class='form-label'>telefone</label>
+<br>
+<input type='text' class='form-control' name='telefone'>
+<br>
+</div>
 
+<div class='mb-3'>
+<label class='form-label' >CPF</label>
+<br>
+<input type='text'  class='form-control'name='cpf'>
+<br>
+</div>
+
+<div class='mb-3'>
+<label class='form-label'>USUARIO</label>
+<br>
+<input type='text' class='form-control' name='usuario'>
+<br>
+</div>
+
+<div class='mb-3'>
+<label class='form-label' >SENHA</label>
+<br>
+<input type='text' class='form-control'  name='senha'>
+<br>
+</div>
+
+
+
+
+</div>
+<div class='mb-3'>
+<button  class='btn btn-primary' >enviar</button>
+
+</div>
+</div>
+</form>";
+     break;
+     
+
+    case 'adiministrador':
+
+        echo "<div>
+        <form action='{$action}?page=cadastrar'>
+      <h3>ensira os dados</h3>
+   <br> <br>
+      <input type='hidden' name='tipo' value='secretaria'>
+      <input type='hidden' name='page' value='cadastrar'>
+  
+      <label class='form-label'>NOME</label>
+      <br>
+      <input type='text' class='form-control' name='nome'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label'>SOBRENOME</label>
+      <br>
+      <input type='text' class='form-control' name='sobrenome'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label'>email</label>
+      <br>
+      <input type='text' class='form-control' name='email'>
+      <br>
+      </div>
+      
+      
+      <div class='mb-3'>
+      <label class='form-label'>telefone</label>
+      <br>
+      <input type='text' class='form-control' name='telefone'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label' >CPF</label>
+      <br>
+      <input type='text'  class='form-control'name='cpf'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label'>USUARIO</label>
+      <br>
+      <input type='text' class='form-control' name='usuario'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label' >SENHA</label>
+      <br>
+      <input type='text' class='form-control'  name='senha'>
+      <br>
+      </div>
+      
+      
+      
+      
+      </div>
+      <div class='mb-3'>
+      <button  class='btn btn-primary' >enviar</button>
+      
+      </div>
+      </div>
+      </form>";
     break;
 
-    case 'secretaria':
 
-
-
-
-    break;
-
+    case"cliente":
+       echo" <div>
+        <form action='{$action}?page=cadastrar'>
+      <h3>ensira os dados</h3>
+   <br> <br>
+      <input type='hidden' name='tipo' value='pet'>
+      <input type='hidden' name='page' value='cadastrar'>
+  
+      <label class='form-label'>NOME</label>
+      <br>
+      <input type='text' class='form-control' name='nome'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label'>SOBRENOME</label>
+      <br>
+      <input type='text' class='form-control' name='sobrenome'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label'>email</label>
+      <br>
+      <input type='text' class='form-control' name='email'>
+      <br>
+      </div>
+      
+      
+      <div class='mb-3'>
+      <label class='form-label'>telefone</label>
+      <br>
+      <input type='text' class='form-control' name='telefone'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label' >CPF</label>
+      <br>
+      <input type='text'  class='form-control'name='cpf'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label'>USUARIO</label>
+      <br>
+      <input type='text' class='form-control' name='usuario'>
+      <br>
+      </div>
+      
+      <div class='mb-3'>
+      <label class='form-label' >SENHA</label>
+      <br>
+      <input type='text' class='form-control'  name='senha'>
+      <br>
+      </div>
+      
+      
+      
+      
+      </div>
+      <div class='mb-3'>
+      <button  class='btn btn-primary' >enviar</button>
+      
+      </div>
+      </div>
+      </form>";
+        break;
     default:
     break;
 
@@ -195,6 +372,4 @@ function cadastrar($deOnde,$conn,$action){
         }
 }    
 ?>
-
-
 
