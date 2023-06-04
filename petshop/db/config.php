@@ -26,17 +26,21 @@ echo"
 <form action='{$action}'>
 <input type='hidden' name='page' value='listar' >
 <input type='hidden' name='func' value='{$func}' >
+
 ";
 
 if( $func=='adiministrador')
 echo"
-<input type='radio' name='tipo' value='secretaria' >secretaria
+<input type='radio' name='tipo' value='cliente' >secretaria
 <br>
 ";
 
 if($func=='secretaria' || $func=='adiministrador')
 echo"
 <input type='radio' name='tipo' value='cliente' >clientes
+<br>
+
+<input type='radio' name='tipo' value='servico' >serviços
 <br>
 ";
 

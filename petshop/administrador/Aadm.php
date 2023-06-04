@@ -31,6 +31,9 @@ echo"
     </button>
 <div class='collapse navbar-collapse' id='navbarNavDropdown2'>
       <ul class='navbar-nav'>
+      <li class='nav-item'>
+      <a class='nav-link active' href='../login/login.php'>Sair</a>
+      </li>
         <li class='nav-item'>
         <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
         manipular pessoas
@@ -116,6 +119,7 @@ switch(@$_SESSION["Muser"]){
       default:
       break;
     }
+    $_SESSION['Muser']="nao";
   
 
 
@@ -126,7 +130,9 @@ switch(@$_SESSION["acao"]){
     if(true){
       if($_SESSION["func"]=="adiministrador"){          
      $sql="SELECT  * FROM {$_SESSION['tipoL']}" ;
-      }else{
+    }elseif($_SESSION['tipoL']=="pet" ||$_SESSION['tipoL']=="servico"){
+      $sql="SELECT  * FROM {$_SESSION['tipoL']}";
+    }else{
         $sql="SELECT  * FROM {$_SESSION['tipoL']} WHERE func='cliente' || func='pet'" ;
 
       }
@@ -147,38 +153,30 @@ switch(@$_SESSION["acao"]){
           echo  "<th>função</th>";
       break;
   
-      case "assuntos" :
+      case "pet" :
           echo "<h1>Dados Dos {$_SESSION['tipoL']}</h1>";
           echo "<table 
           class='table table-hover table-striped table-bordered'>";
           echo"<tr>";
-          echo  "<th>comando da questao</th>";
-          echo  "<th>Diciplina</th>";
-          echo  "<th>Dificuldade</th>";
-          echo  "<th>codigo</th>";
+          echo  "<th>raca</th>";
+          echo  "<th>tamanho</th>";
+          echo  "<th>dono</th>";
+        
           break;
         
-      case "diciplinas" :
+      case "servico" :
          
           echo "<h1>Dados Das {$_SESSION['tipoL']}</h1>";
           echo "<table 
           class='table table-hover table-striped table-bordered'>";
           echo"<tr>";
           echo  "<th>nome</th>";
+          echo  "<th>descrição</th>";
+          echo  "<th>tipo</th>";
+          echo  "<th>valor</th>";
          
           break;
-      
-      case "provas" :
-          echo "<h1>Dados Das {$_SESSION['tipoL']}</h1>";
-          echo "<table 
-          class='table table-hover table-striped table-bordered'>";
-          echo"<tr>";
-          echo  "<th>nome</th>";
-          echo  "<th>professor</th>";
-          echo  "<th>numquestoes</th>";
-         
-          break;
-      
+  
            default:
               break;
          
@@ -199,27 +197,30 @@ switch(@$_SESSION["acao"]){
           break;
   
   
-      case "assuntos" :
+      case "pet" :
          
-          echo "<tr><td>  {$row->asunto}  </td>";
-          echo "<td>  {$row->diciplina}  </td>";
-          echo "<td>  {$row->dificuldade}  </td>";
-          echo "<td>  {$row->cod}  </td>";
+          echo "<tr><td>  {$row->raca}  </td>";
+          echo "<td>  {$row->tamanho}  </td>";
+          echo "<td>  {$row->dono}  </td>";
+       
          
           break;
   
-      case "diciplinas" :
+      case "servico" :
          
           echo "<tr><td>  {$row->nome}  </td>";
+          echo "<td>  {$row->descrição}  </td>";
+          echo "<td>  {$row->tipo}  </td>";
+          echo "<td>  {$row->valor}  </td>";
          
           break; 
       
       
-      case "provas" :
+      case " " :
          
           echo "<tr><td>  {$row->nome}  </td>";
-          echo "<td>  {$row->professor}  </td>";
-          echo "<td>  {$row->numquestoes}  </td>";
+          echo "<tr><td>  {$row->professor}  </td>";
+          echo "<tr><td>  {$row->numquestoes}  </td>";
          
           break;
   
@@ -228,9 +229,10 @@ switch(@$_SESSION["acao"]){
               break;
           
      }
-      }
-      echo "</table>";
+     
   
+      }echo "</table>";
+      
     }    
            }
 
@@ -241,8 +243,14 @@ switch(@$_SESSION["acao"]){
 
 switch(@$_SESSION["Mfunc"]){
     case "servicos":
-        echo"aqui";
+        include("../funcESPECIAIS/servicos/Aservicos.php");
         break;
+    case "promocoes":
+          include("../funcESPECIAIS/promocoes/Apromocao.php");
+          break;
+    case "relatorio":
+            include("../funcESPECIAIS/relatorio/Arelatorio.php");
+            break;
 }
 
 

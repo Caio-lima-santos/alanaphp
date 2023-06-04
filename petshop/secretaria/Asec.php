@@ -31,6 +31,11 @@ echo"
     </button>
 <div class='collapse navbar-collapse' id='navbarNavDropdown2'>
       <ul class='navbar-nav'>
+
+
+      <li class='nav-item'>
+      <a class='nav-link active' href='../login/login.php'>Sair</a>
+      </li>
         <li class='nav-item'>
         <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
         manipular clientes
@@ -87,6 +92,7 @@ switch(@$_SESSION["Muser"]){
       default:
       break;
     }
+    $_SESSION["Muser"]="nao";
   
 
 
@@ -97,6 +103,8 @@ switch(@$_SESSION["acao"]){
     if(true){
       if($_SESSION["func"]=="adiministrador"){          
      $sql="SELECT  * FROM {$_SESSION['tipoL']}" ;
+      }elseif($_SESSION['tipoL']=="pet" ||$_SESSION['tipoL']=="servico"){
+        $sql="SELECT  * FROM {$_SESSION['tipoL']}";
       }else{
         $sql="SELECT  * FROM {$_SESSION['tipoL']} WHERE func='cliente' || func='pet'" ;
 
@@ -114,28 +122,31 @@ switch(@$_SESSION["acao"]){
           echo"<tr>";
           echo  "<th>nome</th>";
           echo  "<th>usuario</th>";
-          echo  "<th>senha</th>";
+          echo  "<th>dinheiro</th>";
           echo  "<th>função</th>";
       break;
   
-      case "assuntos" :
+      case "pet" :
           echo "<h1>Dados Dos {$_SESSION['tipoL']}</h1>";
           echo "<table 
           class='table table-hover table-striped table-bordered'>";
           echo"<tr>";
-          echo  "<th>comando da questao</th>";
-          echo  "<th>Diciplina</th>";
-          echo  "<th>Dificuldade</th>";
-          echo  "<th>codigo</th>";
+          echo  "<th>raça</th>";
+          echo  "<th>tamanho</th>";
+          echo  "<th>dono(a)</th>";
+         
           break;
         
-      case "diciplinas" :
+      case "servico" :
          
           echo "<h1>Dados Das {$_SESSION['tipoL']}</h1>";
           echo "<table 
           class='table table-hover table-striped table-bordered'>";
           echo"<tr>";
           echo  "<th>nome</th>";
+          echo  "<th>descrição</th>";
+          echo  "<th>tipo</th>";
+          echo  "<th>valor</th>";
          
           break;
       
@@ -151,6 +162,7 @@ switch(@$_SESSION["acao"]){
           break;
       
            default:
+
               break;
          
      }
@@ -164,24 +176,27 @@ switch(@$_SESSION["acao"]){
          
           echo "<tr><td>  {$row->nome}  </td>";
           echo "<td>  {$row->usuario}  </td>";
-          echo "<td>  {$row->senha}  </td>";
+          echo "<td>  {$row->dinheiro}  </td>";
           echo "<td>  {$row->func}   </td>";
          
           break;
   
   
-      case "assuntos" :
+      case "pet" :
          
-          echo "<tr><td>  {$row->asunto}  </td>";
-          echo "<td>  {$row->diciplina}  </td>";
-          echo "<td>  {$row->dificuldade}  </td>";
-          echo "<td>  {$row->cod}  </td>";
+          echo "<tr><td>  {$row->raca}  </td>";
+          echo "<td>  {$row->tamanho}  </td>";
+          echo "<td>  {$row->dono}  </td>";
+    
          
           break;
   
-      case "diciplinas" :
+      case "servico" :
          
           echo "<tr><td>  {$row->nome}  </td>";
+          echo "<tr><td>  {$row->descricao}  </td>";
+          echo "<tr><td>  {$row->tipo}  </td>";
+          echo "<tr><td>  {$row->valor}  </td>";
          
           break; 
       

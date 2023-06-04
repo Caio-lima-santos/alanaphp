@@ -48,12 +48,17 @@ include("./config.php");
 
         case 'listar':
       
-         $_SESSION["acao"]="listar";  
+         $_SESSION["acao"]="listar";
+    
          $_SESSION["tipoL"]=$_REQUEST["tipo"];
-         switch(@$_REQUEST["func"])
+         echo"{$_REQUEST['func']}";
+         echo"{$_REQUEST['tipo']}";
+       
+         switch($_REQUEST["func"])
          {
              
-        case "administrador":
+        case "adiministrador":
+         echo"aqui";
             header("Location: ../administrador/Aadm.php");
             break;
     
