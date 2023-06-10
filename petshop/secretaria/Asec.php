@@ -88,6 +88,10 @@ switch(@$_SESSION["Muser"]){
 
       excluir("../db/cad.php");
     break;
+
+    case"editar":
+       editar("../db/cad.php");
+      break;
   
       default:
       break;
@@ -194,9 +198,9 @@ switch(@$_SESSION["acao"]){
       case "servico" :
          
           echo "<tr><td>  {$row->nome}  </td>";
-          echo "<tr><td>  {$row->descricao}  </td>";
-          echo "<tr><td>  {$row->tipo}  </td>";
-          echo "<tr><td>  {$row->valor}  </td>";
+          echo "<td>  {$row->descrição}  </td>";
+          echo "<td>  {$row->tipo}  </td>";
+          echo "<td>  {$row->valor}  </td>";
          
           break; 
       

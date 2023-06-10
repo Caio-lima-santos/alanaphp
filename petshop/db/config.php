@@ -158,14 +158,14 @@ $nome=$_SESSION["func"];
 
         <div>
       <form action='{$action}?page=cadastrar'>
-    <h3>ensira os dados</h3>
+    <h3>ensira os dados para cadastro de clientes</h3>
  <br> <br>
     <input type='hidden' name='tipo' value='cliente'>
     <input type='hidden' name='func' value='cliente'>
     <input type='hidden' name='action' value=''>
-    <input type='hidden' name='page' value='cadastrar'>
+    <input type='hidden' name='page'value='cadastrar''>
     <div >
-    <input type='hidden' name='acao'value='cadastrar'>
+    <input type='hidden' name='acao'value='editar'>
 <label class='form-label'>NOME</label>
 <br>
 <input type='text' class='form-control' name='nome'>
@@ -225,6 +225,55 @@ $nome=$_SESSION["func"];
 </div>
 </div>
 </form>";
+
+echo"<form action='{$action}?page=cadastrar'>
+    <h3>ensira os dados para cadastro de pets</h3>
+ <br> <br>
+    <input type='hidden' name='tipo' value='pet'>
+    <input type='hidden' name='func' value='pet'>
+ 
+    <input type='hidden' name='page'value='cadastrar''>
+    <div >
+    <input type='hidden' name='acao'value='editar'>
+<label class='form-label'>RAÇA</label>
+<br>
+<input type='text' class='form-control' name='raca'>
+<br>
+</div>
+
+<div class='mb-3'>
+<label class='form-label'>TAMANHO</label>
+<br>
+<input type='text' class='form-control' name='tamanho'>
+<br>
+</div>
+
+<div class='mb-3'>
+<label class='form-label'>PESO</label>
+<br>
+<input type='text' class='form-control' name='peso'>
+<br>
+</div>
+
+
+<div class='mb-3'>
+<label class='form-label'>DONO</label>
+<br>
+<input type='text' class='form-control' name='dono'>
+<br>
+</div>
+
+
+
+
+
+</div>
+<div class='mb-3'>
+<button  class='btn btn-primary' >enviar</button>
+
+</div>
+</div>
+</form>";
      break;
      
 
@@ -235,7 +284,7 @@ $nome=$_SESSION["func"];
       <h3>ensira os dados</h3>
    <br> <br>
       <input type='hidden' name='tipo' value='secretaria'>
-      <input type='hidden' name='page' value='cadastrar'>
+      <input type='hidden' name='page'value='cadastrar''>
   
       <label class='form-label'>NOME</label>
       <br>
@@ -305,7 +354,7 @@ $nome=$_SESSION["func"];
       <h3>ensira os dados</h3>
    <br> <br>
       <input type='hidden' name='tipo' value='pet'>
-      <input type='hidden' name='page' value='cadastrar'>
+      <input type='hidden' name='page'value='cadastrar''>
   
       <label class='form-label'>NOME</label>
       <br>
@@ -375,5 +424,241 @@ $nome=$_SESSION["func"];
 
         }
 }    
-?>
 
+
+
+function editar($action){
+
+    $func=$_SESSION["func"];
+  
+    echo "<h3>AREA DE EDIÇÂO</h3>";
+      
+            switch($func){
+
+
+            case 'secretaria':
+            echo "
+    
+            <div>
+          <form action='{$action}?page=cadastrar'>
+        <h3>ensira os dados</h3>
+     <br> <br>
+        <input type='hidden' name='tipo' value='cliente'>
+        <input type='hidden' name='func' value='cliente'>
+        <input type='hidden' name='action' value=''>
+        <input type='hidden' name='page' value='editar'>
+        <div >
+        <input type='hidden' name='acao'value='editar'>
+    <label class='form-label'>NOME</label>
+    <br>
+    <input type='text' class='form-control' name='nome'>
+    <br>
+    </div>
+    
+    <div class='mb-3'>
+    <label class='form-label'>SOBRENOME</label>
+    <br>
+    <input type='text' class='form-control' name='sobrenome'>
+    <br>
+    </div>
+    
+    <div class='mb-3'>
+    <label class='form-label'>email</label>
+    <br>
+    <input type='text' class='form-control' name='email'>
+    <br>
+    </div>
+    
+    
+    <div class='mb-3'>
+    <label class='form-label'>telefone</label>
+    <br>
+    <input type='text' class='form-control' name='telefone'>
+    <br>
+    </div>
+    
+    <div class='mb-3'>
+    <label class='form-label' >CPF</label>
+    <br>
+    <input type='text'  class='form-control'name='cpf'>
+    <br>
+    </div>
+    
+    <div class='mb-3'>
+    <label class='form-label'>USUARIO</label>
+    <br>
+    <input type='text' class='form-control' name='usuario'>
+    <br>
+    </div>
+    
+    <div class='mb-3'>
+    <label class='form-label' >SENHA</label>
+    <br>
+    <input type='text' class='form-control'  name='senha'>
+    <br>
+    </div>
+    
+    
+    
+    
+    </div>
+    <div class='mb-3'>
+    <button  class='btn btn-primary' >enviar</button>
+    
+    </div>
+    </div>
+    </form>";
+         break;
+         
+    
+        case 'adiministrador':
+    
+            echo "<div>
+            <form action='{$action}?page=cadastrar'>
+          <h3>ensira os dados</h3>
+       <br> <br>
+          <input type='hidden' name='tipo' value='secretaria'>
+          <input type='hidden' name='page' value='editar'>
+      
+          <label class='form-label'>NOME</label>
+          <br>
+          <input type='text' class='form-control' name='nome'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label'>SOBRENOME</label>
+          <br>
+          <input type='text' class='form-control' name='sobrenome'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label'>email</label>
+          <br>
+          <input type='text' class='form-control' name='email'>
+          <br>
+          </div>
+          
+          
+          <div class='mb-3'>
+          <label class='form-label'>telefone</label>
+          <br>
+          <input type='text' class='form-control' name='telefone'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label' >CPF</label>
+          <br>
+          <input type='text'  class='form-control'name='cpf'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label'>USUARIO</label>
+          <br>
+          <input type='text' class='form-control' name='usuario'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label' >SENHA</label>
+          <br>
+          <input type='text' class='form-control'  name='senha'>
+          <br>
+          </div>
+          
+          
+          
+          
+          </div>
+          <div class='mb-3'>
+          <button  class='btn btn-primary' >enviar</button>
+          
+          </div>
+          </div>
+          </form>";
+        break;
+    
+    
+        case"cliente":
+           echo" <div>
+            <form action='{$action}?page=cadastrar'>
+          <h3>ensira os dados</h3>
+       <br> <br>
+          <input type='hidden' name='tipo' value='pet'>
+          <input type='hidden' name='page' value='editar'>
+      
+          <label class='form-label'>NOME</label>
+          <br>
+          <input type='text' class='form-control' name='nome'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label'>SOBRENOME</label>
+          <br>
+          <input type='text' class='form-control' name='sobrenome'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label'>email</label>
+          <br>
+          <input type='text' class='form-control' name='email'>
+          <br>
+          </div>
+          
+          
+          <div class='mb-3'>
+          <label class='form-label'>telefone</label>
+          <br>
+          <input type='text' class='form-control' name='telefone'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label' >CPF</label>
+          <br>
+          <input type='text'  class='form-control'name='cpf'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label'>USUARIO</label>
+          <br>
+          <input type='text' class='form-control' name='usuario'>
+          <br>
+          </div>
+          
+          <div class='mb-3'>
+          <label class='form-label' >SENHA</label>
+          <br>
+          <input type='text' class='form-control'  name='senha'>
+          <br>
+          </div>
+          
+          
+          
+          
+          </div>
+          <div class='mb-3'>
+          <button  class='btn btn-primary' >enviar</button>
+          
+          </div>
+          </div>
+          </form>";
+            break;
+        default:
+        break;
+    
+    
+    
+    
+            }
+
+
+
+}
+?>

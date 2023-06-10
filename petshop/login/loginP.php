@@ -35,7 +35,7 @@ if($row = $res->fetch_object()){
 
             
         case "cliente":
-            header("Location: ../ACadastro/Agerente.php");
+            header("Location: ../cliente/Acli.php");
             break;
 
             

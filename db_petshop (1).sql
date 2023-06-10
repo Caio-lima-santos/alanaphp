@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Jun-2023 às 07:15
+-- Tempo de geração: 10-Jun-2023 às 19:09
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -44,9 +44,11 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `usuario`, `senha`, `nome`, `cpf`, `email`, `telefone`, `func`, `dinheiro`) VALUES
-(4, 'alana', '123', 'alana sla', '21321321', 'alana@gmail.com', '123213123', 'adiministrador', 0),
-(5, 'caio', '123', 'caio', '231243245234', '@email.com', '4325345634', 'secretaria', 0),
-(6, 'pedro', '123', 'pedro', '21321321', 'alana@gmail.com', '123213123', 'cliente', 0);
+(4, 'alana', '123', 'alana 3', '213 21312312', 'alison@gmail.com', '123213123', 'cliente', 399925),
+(5, 'caio', '123', 'caio', '231243245234', '@email.com', '4325345634', 'adiministrador', 39975),
+(6, 'pedro', '123', 'pedro', '21321321', 'alana@gmail.com', '123213123', 'secretaria', 4000),
+(8, '', '', 'petshop', '', '', '', '', 300),
+(9, '', '', 'joas', '', 'ae', '', 'cliente', 0);
 
 -- --------------------------------------------------------
 
@@ -58,15 +60,19 @@ CREATE TABLE `pet` (
   `id` int(11) NOT NULL,
   `raca` varchar(255) NOT NULL,
   `tamanho` varchar(255) NOT NULL,
-  `dono` varchar(255) NOT NULL
+  `dono` varchar(255) NOT NULL,
+  `peso` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `pet`
 --
 
-INSERT INTO `pet` (`id`, `raca`, `tamanho`, `dono`) VALUES
-(1, 'golden', '150', 'caio');
+INSERT INTO `pet` (`id`, `raca`, `tamanho`, `dono`, `peso`) VALUES
+(1, 'golden', '150', 'caio', 0),
+(2, 'golden', '150', 'alana 3', 0),
+(3, 'pinsher', '40', 'alana 3', 50),
+(4, 'pit bull', '100', 'alana 3', 30);
 
 -- --------------------------------------------------------
 
@@ -80,19 +86,20 @@ CREATE TABLE `servico` (
   `descrição` varchar(255) NOT NULL,
   `tipo` varchar(255) NOT NULL,
   `valor` float NOT NULL,
-  `desconto` double NOT NULL
+  `desconto` double NOT NULL,
+  `para` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `servico`
 --
 
-INSERT INTO `servico` (`id`, `nome`, `descrição`, `tipo`, `valor`, `desconto`) VALUES
-(1, 'banho', 'banho leve e bom', 'limpeza', 50, 0.5),
-(2, 'tosa', 'tasagem braba', 'estilo', 20, 0),
-(3, '', '', 'limpeza', 50, 0.5),
-(4, '', '', 'limpeza', 50, 0.5),
-(5, '', '', 'limpeza', 50, 0.5);
+INSERT INTO `servico` (`id`, `nome`, `descrição`, `tipo`, `valor`, `desconto`, `para`) VALUES
+(1, 'banho', 'banho leve e bom', 'limpeza', 50, 0.5, 'golden'),
+(2, 'tosa', 'tasagem braba', 'estilo', 20, 0, 'pit bull'),
+(3, 'banho rapido', '', 'limpeza', 50, 0.5, 'pinsher'),
+(4, 'banho demorado', '', 'limpeza', 50, 0.5, 'golden'),
+(5, 'banho com perfume', '', 'limpeza', 50, 0.5, 'golden');
 
 --
 -- Índices para tabelas despejadas
@@ -124,13 +131,13 @@ ALTER TABLE `servico`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `pet`
 --
 ALTER TABLE `pet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `servico`

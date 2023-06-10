@@ -92,6 +92,16 @@ while($row=$res3->fetch_object())
 echo"</table>";
 echo"</div>";
 
+$sql="SELECT * FROM cliente WHERE nome='petshop'";
+$res=$conn->query($sql);
+$row=$res->fetch_object();
+
+echo"<h3>valor arecadado pelo pet shop</h3><br>";
+
+echo"<h5>valor:{$row->dinheiro}</h5>";
 
 
 ?>
+
+
+
