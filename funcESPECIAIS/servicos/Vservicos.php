@@ -6,7 +6,7 @@ $nome=$_REQUEST['nome'];
 $desc=$_REQUEST['descricao'];
 $ti=$_REQUEST['tipo'];
 $va=$_REQUEST['valor'];
-
+$para=$_REQUEST['para'];
 
 $sql="INSERT INTO servico 
 VALUES
@@ -15,7 +15,8 @@ VALUES
 '{$desc}',
 '{$ti}',
 '{$va}',
-'{}')";
+'{}',
+'{$para}')";
 
 $conn->query($sql);
 

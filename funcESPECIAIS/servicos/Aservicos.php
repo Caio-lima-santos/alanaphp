@@ -12,6 +12,9 @@
 <label for="">descrição</label>
 <input type="text"name="descricao" >
 <br>
+<label for="">para que animal?</label>
+<input type="text"name="para" >
+<br>
 <label for="">valor</label>
 <input type="text"name="valor" >
 

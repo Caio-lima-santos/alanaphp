@@ -93,6 +93,7 @@ outras funções
 echo"
 </ul>
 </li>
+<a class='nav-link' href='../login/login.php'>sair</a>
 </ul>
 </ul>
 </div>
