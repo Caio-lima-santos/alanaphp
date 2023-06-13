@@ -48,7 +48,7 @@ if($row = $res->fetch_object()){
     }
    
 }else{
-    header("Location: ../Alogin/login.php");  
+    header("Location: ../login/login.php");  
 }
 
 ?>
